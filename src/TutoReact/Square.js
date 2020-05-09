@@ -13,8 +13,7 @@ function Square (props) {
                 onClick={props.onClick }
             >{props.value}
             </button>
-
-        )
+        );
     }
 
 export default Square;
