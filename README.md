@@ -1,3 +1,11 @@
+Here, you'll find Chaos : all apps in one
+
+This repo get together different stuffs I code during my training.
+From learning tutorials to app attempts, includes drills and functionality explorations.
+
+As a map of my journey.
+
+----
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
