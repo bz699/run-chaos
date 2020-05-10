@@ -1,11 +1,10 @@
 import React from 'react';
 import './Style/Path.css';
 
-function Path (path) {
+function Path () {
 
         return (
-            <div className="Path">
-                </div>
+            <div className="Path">{this.props.number}</div>
         )
     }
 

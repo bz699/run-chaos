@@ -34,6 +34,8 @@ class BoardMaster extends React.Component {
         return this.currentPlayerPosition(Board)
     }
 
+
+
     currentPath = (Board) => {
         let iPath = this.state.Path
         return Board.map(number =>
@@ -76,17 +78,15 @@ class BoardMaster extends React.Component {
     render () {
         console.log()
         return (
-            <div>
-                <div className="TileBoard">
 
-                    <Grid
-                        width={60}
-                        gap={2}
-                    >
-                    {this.CurrentBoard()}
-                    </Grid>
-                </div>
-                <button onClick={this.updateCurrentPlayerPosition}>Moove</button>
+            <div className="TileBoard">
+
+                <Grid
+                    width={60}
+                    gap={2}
+                >
+                {this.CurrentBoard()}
+                </Grid>
             </div>
 
 
