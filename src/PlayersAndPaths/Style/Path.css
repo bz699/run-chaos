@@ -1,0 +1,22 @@
+.Path {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ffae19;
+    background-image: linear-gradient(to right, #ffae19, #f4661b);
+    animation: gradient-animated 3s infinite;
+    background-size: 400%;
+}
+
+
+@keyframes gradient-animated{
+    0%{
+      background-position: 4% 0%;
+    }
+    50%{
+      background-position: 97% 100%;
+    }
+    100%{
+      background-position: 4% 0%;
+    }
+  }

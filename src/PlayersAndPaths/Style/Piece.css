@@ -1,0 +1,8 @@
+.Player1Piece {
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+    border-right-width: 25px;
+    border-left-width: 25px;
+    border-bottom: 25px solid rgb(29, 168, 134);
+  }
