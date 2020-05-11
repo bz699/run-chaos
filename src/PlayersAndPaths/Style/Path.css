@@ -1,12 +1,42 @@
 .Path {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ffae19;
-    background-image: linear-gradient(to right, #ffae19, #f4661b);
-    animation: gradient-animated 3s infinite;
-    background-size: 400%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffae19;
+  background-image: linear-gradient(to right, #ffae19, #f4661b);
+  animation: gradient-animated 3s infinite;
+  background-size: 400%;
 }
+
+.PathPlayer2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to right, #9999ff, #6565e5);
+  border: 1px solid #9999ff;
+  animation: gradient-animated 2s infinite;
+  background-size: 400%;
+  }
+
+  .PathPlayer3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d8fff2;
+  background-image: linear-gradient(to right, #d8fff2, #54b38c);
+  animation: gradient-animated 3s infinite;
+  background-size: 400%;
+  }
+  
+.PathPlayer4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ffccff;
+  background-image: linear-gradient(to right, #ffccff, #990099);
+  animation: gradient-animated 3s infinite;
+  background-size: 400%;
+  }
 
 
 @keyframes gradient-animated{

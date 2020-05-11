@@ -3,6 +3,7 @@ import './Style/Tile.css';
 
 
 class Tile extends React.Component {
+  
     render() {
       return (
         <div className="Tile">{this.props.number}

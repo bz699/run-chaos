@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 import Morpion from './TutoReact/Morpion'
-import BoardMaster from './PlayersAndPaths/BoardMaster'
+import Game from './PlayersAndPaths/Game'
+// import BoardMaster from './PlayersAndPaths/BoardMaster'
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
         >Learn React
         </a>
       </header>
-      <BoardMaster />
+      <Game />
+      {/* <BoardMaster /> */}
     </div>
   );
 }

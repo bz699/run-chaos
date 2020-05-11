@@ -46,9 +46,9 @@ class BoardMaster extends React.Component {
     }
 
     currentPlayerPosition = (Board) => {
-        let iPosition = this.state.PlayerPosition
+        let Position = this.state.PlayerPosition
         return Board.map(number => (
-            iPosition === number
+            Position === number
             ? <Piece number={number} />
             : <Tile number={number} />
         ))

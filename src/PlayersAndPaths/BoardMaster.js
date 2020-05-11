@@ -8,85 +8,79 @@ import Path from './Path';
 import './Style/BoardMaster.css';
 
 
-
 class BoardMaster extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            DiceResult: 4,
-            Board: [],
-            PlayerPosition: 0,
-            Path: [0,1,2,6,10,9,13,14],
+            currentBoard: [],
+            playerPosition: 1,
+            path: [0,1,2,3,4,8,12,11],
+            pathEnd: [11],
+            gameEnd: 0,
+            diceRolled: false,
+            diceResult: null,
         }
     }
 
+    // gère le lancé de dés et met à jour la position du joueur
+    handleDiceRolled = () => {
+        const { diceResult, diceRolled, playerPosition } = this.state
+        let Result = Math.floor(1 + Math.random() * 5);
 
-    componentDidMount(){
-        this.CurrentBoard();
+        this.setState({ diceRolled : !diceRolled });
+        this.setState({ diceResult : Result});
+        this.updatePlayerPosition()
     }
- 
 
-    CurrentBoard = () => {
-        let Board = this.state.Board
-        for (let tile = 0; tile <16; tile ++){
-            Board.push(tile)
+    // met à jour la position du joueur et repére s'il arrive sur la case de fin
+    updatePlayerPosition = () => {
+        const { playerPosition, diceRolled, diceResult, pathEnd } = this.state;
+        if (diceRolled) {
+            let updatePlayerPosition = playerPosition + diceResult
+            if(updatePlayerPosition < pathEnd) {
+                this.setState({playerPosition : updatePlayerPosition})
+            } else {
+                this.setState({gameEnd: 1})
+            }
         }
-        return this.currentPlayerPosition(Board)
     }
 
-    currentPath = (Board) => {
-        let iPath = this.state.Path
-        return Board.map(number =>
-            iPath.includes(number)
-            ? <Path number={number} />
-            : <Tile number={number} />
-        )
-    }
-
-    currentPlayerPosition = (Board) => {
-        let iPosition = this.state.PlayerPosition
-        return Board.map(number => (
-            iPosition === number
-            ? <Piece number={number} />
-            : <Tile number={number} />
-        ))
-    }
-    
-
-    updateCurrentPlayerPosition = (position) => {
-        let updateCurrentPlayerPosition = this.state.PlayerPosition + this.state.DiceResult
-        this.setState({PlayerPosition : updateCurrentPlayerPosition})    
-    }
-
-    handlePieceMovement = () => {
-        let PlayerPosition = this.state.PlayerPosition
-        let DiceResult = this.state.DiceResult
-        let Destination = PlayerPosition + DiceResult
-        while (PlayerPosition < Destination){
-        return <Piece /> & PlayerPosition ++
-}
+    // affiche les cases du plateau en faisant appel aux composant selon leur qualité (pion, parcours, ou simple tuile)
+    currentPath = () => {
+        const { board } = this.props;
+        const { path, playerPosition } = this.state;
         
+        return board.map(number => {
+            if(path.includes(number)) {
+                if (playerPosition === number){
+                    return <Piece number={number} />
+                } else {
+                    return <Path number={number} />
+                };
+            } else {
+                return <Tile number={number} />
+            };
+        });
     }
-
- 
-    
 
 
 
     render () {
-        console.log()
+        const { board, playerTurn } = this.props;
+        const {diceRolled, diceResult} = this.state
+        console.log(diceRolled)
+
         return (
             <div>
                 <div className="TileBoard">
-
                     <Grid
                         width={60}
                         gap={2}
-                    >
-                    {this.CurrentBoard()}
+                     >{this.currentPath()}
                     </Grid>
                 </div>
-                <button onClick={this.updateCurrentPlayerPosition}>Moove</button>
+                <button onClick = {this.handleDiceRolled} disabled = { diceRolled }> { diceRolled ? diceResult : "Roll Dices" }</button>
+                <button onClick={this.updatePlayerPosition}>Moove</button>
             </div>
 
 
