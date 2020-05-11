@@ -13,19 +13,19 @@ class BoardMaster extends React.Component {
         super(props);
         this.state = {
             currentBoard: [],
-            playerPosition: 1,
-            path: [0,1,2,3,4,8,12,11],
+            playerPosition: 0,
+            path: [0,1,2,3,7,11,10],
             pathEnd: [11],
             gameEnd: 0,
             diceRolled: false,
             diceResult: null,
         }
     }
-
+    
     // gère le lancé de dés et met à jour la position du joueur
     handleDiceRolled = () => {
         const { diceResult, diceRolled, playerPosition } = this.state
-        let Result = Math.floor(1 + Math.random() * 5);
+        let Result = Math.floor(1 + Math.random() * 7);
 
         this.setState({ diceRolled : !diceRolled });
         this.setState({ diceResult : Result});
@@ -34,11 +34,13 @@ class BoardMaster extends React.Component {
 
     // met à jour la position du joueur et repére s'il arrive sur la case de fin
     updatePlayerPosition = () => {
-        const { playerPosition, diceRolled, diceResult, pathEnd } = this.state;
+        const { playerPosition, diceRolled, diceResult, pathEnd, path } = this.state;
         if (diceRolled) {
-            let updatePlayerPosition = playerPosition + diceResult
-            if(updatePlayerPosition < pathEnd) {
-                this.setState({playerPosition : updatePlayerPosition})
+            let move = playerPosition + diceResult
+            let newPosition = path[move]
+
+            if(newPosition < pathEnd) {
+                this.setState({playerPosition : newPosition})
             } else {
                 this.setState({gameEnd: 1})
             }
@@ -68,7 +70,7 @@ class BoardMaster extends React.Component {
     render () {
         const { board, playerTurn } = this.props;
         const {diceRolled, diceResult} = this.state
-        console.log(diceRolled)
+        console.log(board)
 
         return (
             <div>

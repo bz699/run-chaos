@@ -22,7 +22,7 @@ class Game extends React.Component {
 
   createBoard = () => {
     const { board } = this.state;
-    for (let tile = 1; tile <17; tile ++){
+    for (let tile = 0; tile <16; tile ++){
         board.push(tile)
     }
     return this.setState({ board: board })
