@@ -103,7 +103,7 @@ class SelectPlayers extends React.Component {
         </div>
 
       </div>
-        <PlayButton active={this.isButtonactive()} />
+        <PlayButton active={this.isButtonactive()}/>
       </div>
     );
   }

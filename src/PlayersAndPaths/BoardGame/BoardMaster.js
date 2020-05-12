@@ -16,9 +16,10 @@ class BoardMaster extends React.Component {
             diceRolled: false,
             diceResult: null,
             enigmaOn: false,
+
             currentBoard: [],
             playerPosition: 0,
-            path: [0,1,2,3,4,5,6,14,22,30,38,37],
+            path: [0,1,9,17,25,24,32,40,41,42,43,35],
             pathEnd: 37,
             gameEnd: 0,
         }
