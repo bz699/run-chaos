@@ -9,7 +9,7 @@ class Piece extends React.Component {
 
     render () {
         return (
-            <div className = "Path">
+            <div className = "PathPlayer1">
                 <div className="Player1Piece">{this.props.number}</div>
             </div>
             

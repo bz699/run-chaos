@@ -1,6 +1,8 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
+
 import Checkbox from "./Checkbox";
-import Button from "./Button";
+import PlayButton from "./Button";
 
 import './Style/SelectPlayers.css'
 
@@ -83,10 +85,10 @@ class SelectPlayers extends React.Component {
         <div className = "CharacterCard">
           <div className = "Character">SARAH</div>
           <Checkbox
-          id="player4"
+          id="player3"
           name="Sarah"
-          checked={players[3].selected}
-          handleCheckboxChange={e => this.handleCheckboxChange(e, 3)}
+          checked={players[2].selected}
+          handleCheckboxChange={e => this.handleCheckboxChange(e, 2)}
           />
 
         </div>
@@ -103,7 +105,8 @@ class SelectPlayers extends React.Component {
 
       </div>
 
-        <Button active={this.isButtonactive()} />
+        <PlayButton active={this.isButtonactive()} />
+         <NavLink to="/Game"></NavLink>
       </div>
     );
   }

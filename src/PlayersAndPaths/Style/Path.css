@@ -1,10 +1,10 @@
-.Path {
+.PathPlayer1 {
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #ffae19;
-  background-image: linear-gradient(to right, #ffae19, #f4661b);
-  animation: gradient-animated 3s infinite;
+  background-image: linear-gradient(to right, #fcd68f, #ffae19);
+  animation: gradient-animated 2s infinite;
   background-size: 400%;
 }
 
@@ -24,7 +24,7 @@
   justify-content: center;
   border: 1px solid #d8fff2;
   background-image: linear-gradient(to right, #d8fff2, #54b38c);
-  animation: gradient-animated 3s infinite;
+  animation: gradient-animated 2s infinite;
   background-size: 400%;
   }
   
@@ -34,7 +34,7 @@
   justify-content: center;
   border: 1px solid #ffccff;
   background-image: linear-gradient(to right, #ffccff, #990099);
-  animation: gradient-animated 3s infinite;
+  animation: gradient-animated 2s infinite;
   background-size: 400%;
   }
 

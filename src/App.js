@@ -3,10 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 import Morpion from './TutoReact/Morpion'
-import Game from './PlayersAndPaths/Game'
-
 import SelectPlayers from './PlayersAndPaths/Players/SelectPlayers'
-
+import Game from './PlayersAndPaths/Game'
 // import BoardMaster from './PlayersAndPaths/BoardMaster'
 
 function App() {
@@ -26,6 +24,7 @@ function App() {
         </a>
       </header>
       <SelectPlayers />
+      <Game />
       {/* <BoardMaster /> */}
     </div>
   );

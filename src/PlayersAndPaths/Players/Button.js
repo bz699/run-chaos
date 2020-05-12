@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Button extends Component {
+class PlayButton extends Component {
   render() {
     let { active } = this.props;
 
@@ -17,4 +17,4 @@ class Button extends Component {
   }
 }
 
-export default Button;
+export default PlayButton;

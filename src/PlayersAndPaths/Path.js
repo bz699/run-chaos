@@ -4,7 +4,7 @@ import './Style/Path.css';
 function Path (props) {
 
         return (
-            <div className="Path">{props.number}</div>
+            <div className="PathPlayer1">{props.number}</div>
         )
     }
 

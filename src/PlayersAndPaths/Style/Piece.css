@@ -4,6 +4,67 @@
     border: 0 solid transparent;
     border-right-width: 25px;
     border-left-width: 25px;
-    border-bottom: 25px solid rgb(29, 168, 134);
+    border-bottom: 25px solid #f4661b;
   }
 
+  .Player2Piece {
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+    border-right-width: 25px;
+    border-left-width: 25px;
+    border-bottom: 25px solid #323272;
+  }
+
+  .Player3Piece {
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+    border-right-width: 25px;
+    border-left-width: 25px;
+    border-bottom: 25px solid #326b54;
+  }
+
+  .Player4Piece {
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+    border-right-width: 25px;
+    border-left-width: 25px;
+    border-bottom: 25px solid #4c004c;
+  }
+
+/* arrow form for piece pointing in the move direction */
+
+  .arrow-up {
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+    border-right-width: 25px;
+    border-left-width: 25px;
+  }
+
+.arrow-right {
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+    border-top-width: 25px;
+    border-bottom-width: 25px;
+  }
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+    border-right-width: 25px;
+    border-left-width: 25px;
+
+  }
+
+.arrow-left {
+    width: 0;
+    height: 0;
+    border: 0 solid transparent;
+    border-top-width: 25px;
+    border-bottom-width: 25px;
+  }
