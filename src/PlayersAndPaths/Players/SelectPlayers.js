@@ -2,7 +2,10 @@ import React from "react";
 import Checkbox from "./Checkbox";
 import Button from "./Button";
 
-class App extends React.Component {
+import './Style/SelectPlayers.css'
+
+
+class SelectPlayers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,31 +56,52 @@ class App extends React.Component {
   render() {
     const { players } = this.state;
     return (
-      <div className="App">
-        <Checkbox
+      <div>
+      <div className = "CharactersContainer">
+
+        <div className = "CharacterCard">
+          <div className = "Character">ALAN</div>
+          <Checkbox
           id="player1"
-          name="selected"
+          name="Alan"
           checked={players[0].selected}
           handleCheckboxChange={e => this.handleCheckboxChange(e, 0)}
-        />
-        <Checkbox
+          />
+        </div>
+
+        <div className = "CharacterCard">
+          <div className = "Character">JUDY</div>
+          <Checkbox
           id="player2"
-          name="selected"
+          name="Judy"
           checked={players[1].selected}
           handleCheckboxChange={e => this.handleCheckboxChange(e, 1)}
-        />
-        <Checkbox
-          id="player3"
-          name="selected"
-          checked={players[2].selected}
-          handleCheckboxChange={e => this.handleCheckboxChange(e, 2)}
-        />
-        <Checkbox
+          />
+
+        </div>
+
+        <div className = "CharacterCard">
+          <div className = "Character">SARAH</div>
+          <Checkbox
           id="player4"
-          name="selected"
+          name="Sarah"
           checked={players[3].selected}
           handleCheckboxChange={e => this.handleCheckboxChange(e, 3)}
-        />
+          />
+
+        </div>
+
+        <div className = "CharacterCard">
+          <div className = "Character">PETER</div>
+          <Checkbox
+          id="player4"
+          name="Sarah"
+          checked={players[3].selected}
+          handleCheckboxChange={e => this.handleCheckboxChange(e, 3)}
+          />
+        </div>
+
+      </div>
 
         <Button active={this.isButtonactive()} />
       </div>
@@ -85,4 +109,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default SelectPlayers;

@@ -1,0 +1,13 @@
+.CharactersContainer {
+    width: 900px;
+    display: flex;
+    flex-direction: raw;
+    margin: 10px;
+}
+
+.CharacterCard {
+    height: 200px;
+    width: 25%;
+    margin: 0 10px;
+    border: solid 2px #0c9437;
+}

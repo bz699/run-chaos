@@ -4,6 +4,9 @@ import './App.css';
 
 import Morpion from './TutoReact/Morpion'
 import Game from './PlayersAndPaths/Game'
+
+import SelectPlayers from './PlayersAndPaths/Players/SelectPlayers'
+
 // import BoardMaster from './PlayersAndPaths/BoardMaster'
 
 function App() {
@@ -22,7 +25,7 @@ function App() {
         >Learn React
         </a>
       </header>
-      <Game />
+      <SelectPlayers />
       {/* <BoardMaster /> */}
     </div>
   );

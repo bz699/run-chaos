@@ -43,6 +43,8 @@ class BoardMaster extends React.Component {
 
         if (diceRolled) {
             let move = playerPosition + diceResult
+
+
             let newPosition = path[move]
 
             if(newPosition !== pathEnd) { // ça peut pas fonctionner ! voir plutôt si move > nbr de cases qu'il reste
