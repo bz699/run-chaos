@@ -20,20 +20,23 @@ class Game extends React.Component {
     this.createBoard()
   }
 
+  //création du plateau de jeu : tableau de cells key=value
   createBoard = () => {
     const { board } = this.state;
-    for (let tile = 0; tile <16; tile ++){
+    for (let tile = 0; tile <64; tile ++){
         board.push(tile)
     }
     return this.setState({ board: board })
   }
 
   render() {
-    const { board, diceRolled ,diceResult, playerTurn } = this.state;
+    const { board, diceRolled ,playerTurn } = this.state;
 
     return (
       <div>
-      <BoardMaster board={board} playerTurn={playerTurn}></BoardMaster>
+        <div className="BoardContainer">
+          <BoardMaster board={board} playerTurn={playerTurn}></BoardMaster>
+        </div>
       </div>
     );
   }
