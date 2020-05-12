@@ -67,3 +67,6 @@
             : <Tile number={number} />
         )
     }
+
+
+    <NavLink to='/Game'>{active ? "jouer" : "select a player"}</NavLink>

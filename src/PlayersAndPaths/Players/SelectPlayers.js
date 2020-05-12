@@ -1,8 +1,7 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
 
 import Checkbox from "./Checkbox";
-import PlayButton from "./Button";
+import PlayButton from "./PlayButton";
 
 import './Style/SelectPlayers.css'
 
@@ -104,9 +103,7 @@ class SelectPlayers extends React.Component {
         </div>
 
       </div>
-
         <PlayButton active={this.isButtonactive()} />
-         <NavLink to="/Game"></NavLink>
       </div>
     );
   }
