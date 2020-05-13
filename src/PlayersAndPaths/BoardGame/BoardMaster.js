@@ -20,7 +20,7 @@ class BoardMaster extends React.Component {
             currentBoard: [],
             playerPosition: 0,
             path: [0,1,9,17,25,24,32,40,41,42,43,35],
-            pathEnd: 37,
+            pathEnd: 35,
             gameEnd: 0,
         }
     }
@@ -44,14 +44,13 @@ class BoardMaster extends React.Component {
 
         if (diceRolled) {
             let move = playerPosition + diceResult
-
-
             let newPosition = path[move]
+            let tileLeft = (path.slice(playerPosition)).lenght
 
-            if(newPosition !== pathEnd) { // ça peut pas fonctionner ! voir plutôt si move > nbr de cases qu'il reste
+            if(newPosition === pathEnd) { // ça peut pas fonctionner ! voir plutôt si move > nbr de cases qu'il reste
                 this.setState({playerPosition : newPosition})
             } else {
-                this.setState({playerPosition : pathEnd})
+                this.setState({playerPosition : pathEnd});
                 this.setState({gameEnd: 1})
             }
         }
@@ -82,7 +81,8 @@ class BoardMaster extends React.Component {
     render () {
         const { board, playerTurn } = this.props;
         const {diceRolled, diceResult , enigmaOn } = this.state
-        console.log(enigmaOn)
+
+        console.log(this.state.playerPosition)
 
         return (
             <div className="AEffacer">

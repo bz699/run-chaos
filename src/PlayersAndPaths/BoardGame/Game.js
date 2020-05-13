@@ -14,37 +14,24 @@ class Game extends React.Component {
       players: [
         {
           id: "player1",
+          name: "Alan",
           player: 1,
-          selected: true,
-          OnTurn: true,
           playerPosition: 0,
           path: [0,1,9,17,25,24,32,40,41,42,43,35],
           pathEnd: 35,
-
         },
         {
-          id: "player2",
+          id: "player2", 
           player: 2,
-          selected: true,
-          OnTurn: false,
+          name: "Judy",
           playerPosition: 7,
           path: [7,15,14,13,12,4,3,11,10,18,26,27],
           pathEnd: 27,
         },
         {
-          id: "player3",
-          player: 3,
-          selected: false,
-          OnTurn: false,
-          playerPosition: 7,
-          path: [63,62,54,46,38,39,31,23,22,21,20,28],
-          pathEnd: 28,
-        },
-        {
           id: "player4",
+          name: "Peter",
           player: 4,
-          OnTurn: false,
-          selected: false,
           playerPosition: 56,
           path: [56,48,49,50,51,59,60,52,53,49,37,36],
           pathEnd: 36,
@@ -59,6 +46,7 @@ class Game extends React.Component {
     this.createBoard()
   }
 
+
   //création du plateau de jeu : tableau de cells key=value
   createBoard = () => {
     const { board } = this.state;
@@ -67,16 +55,34 @@ class Game extends React.Component {
     }
     return this.setState({ board: board })
   }
+  
+
 
   //gestion du tour de jeu
+  handlePlayerTurn = () => {
+    const { playerTurn, players } = this.state
+    const numbersOfPlayers = players.length
+
+      if (playerTurn < numbersOfPlayers) {
+        this.setState({ playerTurn : playerTurn +1 })
+      } else {
+        this.setState({ playerTurn : 1 })
+      }
+  }
+  
 
 
 
   render() {
-    const { board, diceRolled ,playerTurn } = this.state;
+    const { board, diceRolled ,playerTurn, players, name } = this.state;
+    console.log(playerTurn)
+
 
     return (
       <div>
+        
+        <button onClick={ this.handlePlayerTurn } >Player : {playerTurn}</button>
+
         <div className="BoardContainer">
           <BoardMaster board={board} playerTurn={playerTurn}></BoardMaster>
         </div>
