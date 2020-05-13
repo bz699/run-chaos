@@ -55,10 +55,18 @@ class Game extends React.Component {
     }
     return this.setState({ board: board })
   }
+  // ici pour afficher les 4 pions
+  //board.map(number =>
+  //if (board.includes(number)){
+  //  if (playerPosition === number){
+  //  return <Piece number={number} />
+  // } else {
+  //  return <Tile number={number} />
+  // }
   
 
 
-  //gestion du tour de jeu
+  //Gestion du tour de jeu
   handlePlayerTurn = () => {
     const { playerTurn, players } = this.state
     const numbersOfPlayers = players.length
