@@ -87,7 +87,7 @@ class BoardMaster extends React.Component {
         return (
             <div className="AEffacer">
             <div className="TileboardContent">
-                <CentralSphere enigmaOn = {enigmaOn}/>
+                <CentralSphere enigmaOn = {enigmaOn} board playerTurn={playerTurn}/>
                 <div className="TileBoard">
                     <Grid
                         width={60}
