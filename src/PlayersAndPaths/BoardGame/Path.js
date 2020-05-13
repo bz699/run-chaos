@@ -2,9 +2,13 @@ import React from 'react';
 import './Style/Path.css';
 
 function Path (props) {
+    const { playerTurn, number } = props
+    let choosePathClass = "PathPlayer"+playerTurn
+    
+    
 
         return (
-            <div className="PathPlayer1">{props.number}</div>
+            <div className={choosePathClass}>{number}</div>
         )
     }
 

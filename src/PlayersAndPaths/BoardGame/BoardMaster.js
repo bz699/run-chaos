@@ -16,19 +16,67 @@ class BoardMaster extends React.Component {
             diceRolled: false,
             diceResult: null,
             enigmaOn: false,
+            gameEnd: 0,
 
             playerPosition: 0,
             path: [0,1,9,17,25,24,32,40,41,42,43,35],
             pathEnd: 35,
-            gameEnd: 0,
+            
+            players: [
+                    {
+                    player: 1,
+                    idusers: 11,
+                    name: "Alan",
+                    playerPosition: 0,
+                    path: [0,1,9,17,25,24,32,40,41,42,43,35],
+                    pathEnd: 35,
+                    },
+                    {
+                    player: 2,
+                    idusers: 31, 
+                    name: "Judy",
+                    playerPosition: 7,
+                    path: [7,15,14,13,12,4,3,11,10,18,26,27],
+                    pathEnd: 27,
+                    },
+                    { 
+                    player: 3,
+                    idusers: 41,
+                    name: "Peter",
+                    playerPosition: 56,
+                    path: [56,48,49,50,51,59,60,52,53,49,37,36],
+                    pathEnd: 36,
+                    }
+                ]
         }
     }
     
+    // affiche les cases du plateau en faisant appel aux composants selon leur qualité
+    // (pion, parcours du pion en jeu, ou simple tuile)
+    currentBoard = () => {
+        const { board, playerTurn } = this.props;
+        const { path, players, playerPosition } = this.state;
+        let positions = (players.map(player => player.playerPosition))
+        console.log(positions)
+
+        // let player = players.player; else if (&& player === playerTurn)
+        //console.log(players)
+        
+        return board.map(number => {
+            if (positions.includes(number)) {
+                return <Piece number={number} />
+            } else if (path.includes(number)) {
+                return <Path number={number} playerTurn={playerTurn} />
+            }
+            else {
+                return <Tile number={number} />
+            };
+        });
+    }
 
 
     // gère le lancé de dés et met à jour la position du joueur
     handleDiceRolled = () => {
-        const { playerPosition } = this.state
         const { diceResult, diceRolled  } = this.state
 
         let Result = Math.ceil(Math.random() * 6);
@@ -41,7 +89,7 @@ class BoardMaster extends React.Component {
 
     // met à jour la position du joueur et repére s'il arrive sur la case de fin
     updatePlayerPosition = () => {
-        const { playerPosition, path, pathEnd } = this.state;
+        const { playerPosition, path, pathEnd, players } = this.state;
         const { diceRolled, diceResult } = this.state;
 
         if (diceRolled) {
@@ -58,25 +106,7 @@ class BoardMaster extends React.Component {
         }
     }
 
-    // affiche les cases du plateau en faisant appel aux composants selon leur qualité
-    // (pion, parcours du pion en jeu, ou simple tuile)
-    currentPath = () => {
-        const { board, players, playerTurn } = this.props;
-        const { path, playerPosition } = this.state;
-        // let player = players.player; else if (&& player === playerTurn)
-        
-        return board.map(number => {
-            
-            if (playerPosition === number) {
-                return <Piece number={number} />
-            } else if (path.includes(number)) {
-                return <Path number={number} />
-            }
-            else {
-                return <Tile number={number} />
-            };
-        });
-    }
+
 
 
 
@@ -99,7 +129,7 @@ class BoardMaster extends React.Component {
                     <Grid
                         width={60}
                         gap={2}
-                     >{this.currentPath()}
+                     >{this.currentBoard()}
                     </Grid>
                 </div>
             </div>

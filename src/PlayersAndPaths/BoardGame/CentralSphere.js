@@ -4,8 +4,6 @@ import './Style/CentralSphere.css'
 function CentralSphere(props) {
 const { diceRolled, enigmaOn, currentPlayer, handleDiceRolled } = props
 
-console.log({currentPlayer})
-
     return (
         
         <div className="CentralSphere">

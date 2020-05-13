@@ -2,19 +2,20 @@ import React from 'react';
 
 import './Style/Piece.css';
 
-class Piece extends React.Component {
-
+function Piece (props) {
+    const { player, number } = props
+   let choosePieceClass = "PlayerPiece"+player
+   let choosePathClass = "PathPlayer"+player
     
     
 
-    render () {
         return (
             <div className = "PathPlayer1">
-                <div className="Player1Piece">{this.props.number}</div>
+                <div className="PlayerPiece1">{number}</div>
             </div>
-            
+            // on affiche le css si position === positions de players
         )
-    }
+
 }
 
 export default Piece;
