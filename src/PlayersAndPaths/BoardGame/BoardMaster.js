@@ -52,12 +52,12 @@ class BoardMaster extends React.Component {
     currentBoard = () => {
         const { board, playerTurn, currentPlayer } = this.props;
         const { players } = this.state;
+        
+        // ccréation d'un tableau contenant les cases des pions
         let positions = (players.map(player => player.playerPosition))
-
+        // extraction du tableau path du joueur dont c'est le tour
         let currentPath = players.filter(player => player.player === playerTurn).map(filteredPlayer => filteredPlayer.path)
-        // let player = players.player; else if (&& player === playerTurn)
-        //console.log(players)
-        console.log(currentPath)
+
         
         return board.map(number => {
             if (positions.includes(number)) {
