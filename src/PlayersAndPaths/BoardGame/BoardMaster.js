@@ -31,7 +31,7 @@ class BoardMaster extends React.Component {
         const { playerPosition } = this.state
         const { diceResult, diceRolled  } = this.state
 
-        let Result = Math.floor(Math.random() * 6);
+        let Result = Math.ceil(Math.random() * 6);
         // let pathEnd = path.pop() si le path est généré aléatoirement
 
         this.setState({ diceRolled : !diceRolled });
