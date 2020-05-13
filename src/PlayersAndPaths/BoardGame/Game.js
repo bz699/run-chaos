@@ -36,7 +36,7 @@ class Game extends React.Component {
           idusers: 41,
           name: "Peter",
           playerPosition: 56,
-          path: [56,48,49,50,51,59,60,52,53,49,37,36],
+          path: [56,48,49,50,51,59,60,61,53,45,49,37,36],
           pathEnd: 36,
         }
       ],
