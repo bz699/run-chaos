@@ -17,7 +17,6 @@ class BoardMaster extends React.Component {
             diceResult: null,
             enigmaOn: false,
 
-            currentBoard: [],
             playerPosition: 0,
             path: [0,1,9,17,25,24,32,40,41,42,43,35],
             pathEnd: 35,
@@ -29,7 +28,9 @@ class BoardMaster extends React.Component {
 
     // gère le lancé de dés et met à jour la position du joueur
     handleDiceRolled = () => {
-        const { diceResult, diceRolled, playerPosition } = this.state
+        const { playerPosition } = this.state
+        const { diceResult, diceRolled  } = this.state
+
         let Result = Math.floor(Math.random() * 6);
         // let pathEnd = path.pop() si le path est généré aléatoirement
 
@@ -40,14 +41,15 @@ class BoardMaster extends React.Component {
 
     // met à jour la position du joueur et repére s'il arrive sur la case de fin
     updatePlayerPosition = () => {
-        const { playerPosition, diceRolled, diceResult, path, pathEnd } = this.state;
+        const { playerPosition, path, pathEnd } = this.state;
+        const { diceRolled, diceResult } = this.state;
 
         if (diceRolled) {
             let move = playerPosition + diceResult
             let newPosition = path[move]
             let tileLeft = (path.slice(playerPosition)).lenght
 
-            if(newPosition === pathEnd) { // ça peut pas fonctionner ! voir plutôt si move > nbr de cases qu'il reste
+            if(newPosition !== pathEnd) { // ça peut pas fonctionner ! voir plutôt si move > nbr de cases qu'il reste
                 this.setState({playerPosition : newPosition})
             } else {
                 this.setState({playerPosition : pathEnd});
@@ -56,38 +58,43 @@ class BoardMaster extends React.Component {
         }
     }
 
-    // affiche les cases du plateau en faisant appel aux composant selon leur qualité (pion, parcours, ou simple tuile)
+    // affiche les cases du plateau en faisant appel aux composants selon leur qualité
+    // (pion, parcours du pion en jeu, ou simple tuile)
     currentPath = () => {
-        const { board } = this.props;
+        const { board, players, playerTurn } = this.props;
         const { path, playerPosition } = this.state;
+        // let player = players.player; else if (&& player === playerTurn)
         
         return board.map(number => {
-            if(path.includes(number)) {
-                if (playerPosition === number){
-                    return <Piece number={number} />
-                } else {
-                    return <Path number={number} />
-                };
-            } else {
+            
+            if (playerPosition === number) {
+                return <Piece number={number} />
+            } else if (path.includes(number)) {
+                return <Path number={number} />
+            }
+            else {
                 return <Tile number={number} />
             };
         });
     }
 
- 
-
 
 
     render () {
-        const { board, playerTurn } = this.props;
-        const {diceRolled, diceResult , enigmaOn } = this.state
-
-        console.log(this.state.playerPosition)
+        const { board, playerTurn, currentPlayer } = this.props;
+        const {diceRolled, diceResult , enigmaOn } = this.state;
 
         return (
             <div className="AEffacer">
             <div className="TileboardContent">
-                <CentralSphere enigmaOn = {enigmaOn} board playerTurn={playerTurn}/>
+
+                <CentralSphere
+                    diceRolled = {diceRolled}
+                    handleDiceRolled = {this.handleDiceRolled}
+                    enigmaOn = {enigmaOn}
+                    playerTurn={playerTurn}
+                    currentPlayer={currentPlayer}/>
+
                 <div className="TileBoard">
                     <Grid
                         width={60}
@@ -96,7 +103,7 @@ class BoardMaster extends React.Component {
                     </Grid>
                 </div>
             </div>
-            <button onClick = {this.handleDiceRolled} disabled = { diceRolled }> { diceRolled ? diceResult : "Roll Dices" }</button>
+            <button onClick = {this.handleDiceRolled} disabled = { diceRolled }> { diceRolled ? diceResult : "not rolled" }</button>
             <button onClick={this.updatePlayerPosition}>Moove</button>
             </div>
 

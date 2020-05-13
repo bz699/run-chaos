@@ -31,6 +31,8 @@ class SelectPlayers extends React.Component {
     };
   }
 
+  // lors du clic sur une checkbox, on met à jour la key players.selected du joueur selectionné et
+  // on déclenche l'update de l'array players avec cette nouvelle valeur
   handleCheckboxChange = (event, index) => {
     let updatedPlayers = this.state.players.map((player, i) => {
       return {
@@ -41,18 +43,21 @@ class SelectPlayers extends React.Component {
     this.setState({ players: updatedPlayers });
   };
 
+  // on recherche si au moins une key players.selected est à true
   isButtonactive = () => {
-    // on cherche à renvoyer un true (on peut jouer) ou un false (on doit sélectionner un joueur)
-    // si au moins un joueur est sélectionné (selected:true) alors on doit renvoyer true
-    // on utilise .some pour parcourir le tableau : dès que .some trouve une occurrence true
-    // il s'arrête de chercher et renvoie la valeur true
-    // et hop, le bouton est actif si un joueur est actif
-
     let isOnePlayerselected = this.state.players.some(player => {
       return player.selected;
     });
     return isOnePlayerselected;
   };
+
+  // Array à envoyer à Game ou à stocker dans localStorage
+  // .map contenant les données des joueurs sélectionnés seulement
+  // le format de l'objet joueur est géré dans le component joueur
+  // playersOnGame = () => { }
+
+
+
 
   render() {
     const { players } = this.state;
