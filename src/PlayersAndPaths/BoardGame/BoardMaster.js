@@ -25,7 +25,6 @@ class BoardMaster extends React.Component {
                     name: "Alan",
                     playerPosition: 0,
                     path: [0,1,9,17,25,24,32,40,41,42,43,35],
-                    pathEnd: 35,
                     },
                     {
                     player: 2,
@@ -33,7 +32,6 @@ class BoardMaster extends React.Component {
                     name: "Judy",
                     playerPosition: 7,
                     path: [7,15,14,13,12,4,3,2,10,18,26,27],
-                    pathEnd: 27,
                     },
                     { 
                     player: 3,
@@ -41,28 +39,31 @@ class BoardMaster extends React.Component {
                     name: "Peter",
                     playerPosition: 56,
                     path: [56,48,49,50,51,59,60,61,53,45,49,37,36],
-                    pathEnd: 36,
                     }
                 ]
         }
     }
     
+
     // affiche les cases du plateau en faisant appel aux composants selon leur qualité
     // (pion, parcours du pion en jeu, ou simple tuile)
     currentBoard = () => {
         const { board, playerTurn, currentPlayer } = this.props;
         const { players } = this.state;
         
-        // ccréation d'un tableau contenant les cases des pions
+        let position = currentPlayer.playerPosition
+        let currentPath = currentPlayer.path
+        console.log(position)
+        // création d'un tableau contenant les cases des pions
         let positions = (players.map(player => player.playerPosition))
-        // extraction du tableau path du joueur dont c'est le tour
-        let currentPath = players.filter(player => player.player === playerTurn).map(filteredPlayer => filteredPlayer.path)
-
         
+   
         return board.map(number => {
+            if (position === number){
+                return <Piece number={number}/> } 
             if (positions.includes(number)) {
                 return <Piece number={number} />
-            } else if (currentPath[0].includes(number)) {
+            } else if (currentPath.includes(number)) {
                 return <Path number={number} playerTurn={playerTurn} />
             }
             else {
@@ -74,41 +75,44 @@ class BoardMaster extends React.Component {
 
     // gère le lancé de dés et met à jour la position du joueur
     handleDiceRolled = () => {
-        const { diceResult, diceRolled  } = this.state
-
         let Result = Math.ceil(Math.random() * 6);
-        // let pathEnd = path.pop() si le path est généré aléatoirement
-
-        this.setState({ diceRolled : !diceRolled });
-        this.setState({ enigmaOn : true });
-        this.setState({ diceResult : Result});
+            this.setState({ diceRolled : true });
+            this.setState({ enigmaOn : true });
+            this.setState({ diceResult : Result});
     }
+
+
+
 
     // met à jour la position du joueur et repére s'il arrive sur la case de fin
     updatePlayerPosition = () => {
-        const { playerPosition, path, pathEnd, players } = this.state;
-        const { diceRolled, diceResult } = this.state;
+        const { diceRolled, diceResult, players,  } = this.state;
+        const { playerTurn, currentPlayer } = this.props;
+
+        let currentPath= currentPlayer.path
+        let position = currentPlayer.playerPosition
+        let tilesLeft = (currentPath.slice(position)).length
+        
 
         if (diceRolled) {
-            let move = playerPosition + diceResult
+            let path = currentPlayer.path
+            let move = currentPlayer.playerPosition + diceResult
             let newPosition = path[move]
-            let tileLeft = (path.slice(playerPosition)).lenght
 
-            if(newPosition !== pathEnd) { // ça peut pas fonctionner ! voir plutôt si move > nbr de cases qu'il reste
-                this.setState({playerPosition : newPosition})
+            if( move > tilesLeft) {
+            this.setState({gameEnd: 1})
+                // ajouter le setState dans tableau players player === playerTurn
             } else {
-                this.setState({playerPosition : pathEnd});
-                this.setState({gameEnd: 1})
+                this.setState({gameEnd: 0})
+                //this.setState({playerPosition : newPosition})
             }
         }
     }
 
 
 
-
-
     render () {
-        const { board, playerTurn, currentPlayer } = this.props;
+        const { playerTurn, currentPlayer } = this.props; 
         const {diceRolled, diceResult , enigmaOn } = this.state;
 
         return (

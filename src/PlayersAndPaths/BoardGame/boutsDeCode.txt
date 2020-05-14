@@ -62,3 +62,10 @@ class BoardMaster extends React.Component {
 const posit = [...new Set(players.map(player => player.playerPosition))]
 ou
 let positions = (players.map(player => player.playerPosition))
+
+
+// extraire le parcours du joueur dont c'ets le tour de jeu depuis le tableau players
+let currentPath = players.filter(player => player.player === playerTurn).map(filteredPlayer => filteredPlayer.path)
+
+// extraction du tableau path du joueur dont c'est le tour
+        let currentPath = players.filter(player => player.player === playerTurn).map(filteredPlayer => filteredPlayer.path)

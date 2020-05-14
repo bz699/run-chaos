@@ -11,9 +11,17 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+
       board: [],
       playerTurn: 1,
-      currentPlayer:[],
+      currentPlayer:[{
+        player: 1,
+        idusers: 11,
+        name: "Alan",
+        playerPosition: 0,
+        path: [0,1,9,17,25,24,32,40,41,42,43,35],
+        pathEnd: 35}],
+      
       players: [
         {
           player: 1,
@@ -75,13 +83,13 @@ class Game extends React.Component {
     currentPlayer = () => {
       const { players, playerTurn } = this.state
       const extractedPlayer = players.filter(player => player.player === playerTurn)
-      this.setState({currentPlayer : extractedPlayer})
+      this.setState({ currentPlayer : extractedPlayer })
     }
 
 
 
   render() {
-    const { board, currentPlayer, diceRolled ,playerTurn, players, name } = this.state;
+    const { board, currentPlayer, playerTurn } = this.state;
 
     return (
       <div>
@@ -89,7 +97,7 @@ class Game extends React.Component {
         <button onClick={ this.handlePlayerTurn } >Player : {playerTurn}</button>
 
         <div className="BoardContainer">
-          <BoardMaster currentPlayer={currentPlayer[0]} playerTurn={playerTurn} board={board} ></BoardMaster>
+          <BoardMaster playerTurn={playerTurn} board={board} currentPlayer={currentPlayer[0]}></BoardMaster>
         </div>
       </div>
     );
