@@ -57,6 +57,7 @@ class Game extends React.Component {
     this.createBoard();
     this.currentPlayer();
     this.inactivePlayers();
+    this.updatePlayerPosition();
   }
 
 
@@ -80,6 +81,7 @@ class Game extends React.Component {
         this.setState({ playerTurn : 1 })
       }
   }
+
 
   //filtre le joueur dont c'est le tour de jeu pour remplir le state currentPlayer
   currentPlayer = () => {
@@ -107,35 +109,36 @@ class Game extends React.Component {
   
       // met à jour la position du joueur et repére s'il arrive sur la case de fin
       updatePlayerPosition = () => {
-          const { currentPlayer, diceRolled, diceResult } = this.state;
-          const playingPlayer = currentPlayer[0]
-          
-  
-          let currentPath= playingPlayer.path
-          let position = playingPlayer.playerPosition
+        const { diceRolled, diceResult, playerTurn, currentPlayer } = this.state;
+        const playingPlayer = currentPlayer[0]
+        let currentPath= playingPlayer.path
+        let position = playingPlayer.playerPosition
+
+        
+        console.log(playingPlayer)
+
+        if (diceRolled) {
           let tilesLeft = (currentPath.slice(position)).length
-          
-  
-          if (diceRolled) {
-              let move = position + diceResult
-              let newPosition = currentPath[move]
+          let move = position + diceResult
+          let newPosition = currentPath[move]
               
-  
-              if( move > tilesLeft) {
-              this.setState({gameEnd: 1})
-                  // ajouter le setState dans tableau players player === playerTurn
-              } else {
-                  this.setState({playerPosition : newPosition})
-                  this.setState({gameEnd: 0})
-              }
-          }
+            if( move > tilesLeft) {
+            this.setState({gameEnd: 1});
+            console.log("c'est fini")
+                 // ajouter le setState dans tableau players player === playerTurn
+            } else {
+              //this.setState({playerPosition : newPosition})
+              this.setState({gameEnd: 2})
+              console.log("on avance")
+            }
+        }
       }
 
 
 
   render() {
     const { board, playerTurn, currentPlayer, inactivePlayers, diceRolled, diceResult, enigmaOn } = this.state;
-    console.log(currentPlayer)
+    console.log(playerTurn)
 
     return (
       <div>
@@ -154,7 +157,6 @@ class Game extends React.Component {
             updatePlayerPosition = {this.updatePlayerPosition}
             enigmaOn = {enigmaOn}
             >
-
           </BoardMaster>
         </div>
       </div>
