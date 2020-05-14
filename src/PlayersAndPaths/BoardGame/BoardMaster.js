@@ -13,10 +13,9 @@ class BoardMaster extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            diceRolled: false,
-            diceResult: null,
-            enigmaOn: false,
-            gameEnd: 0,
+
+         //   enigmaOn: false,
+
         }
     }
     
@@ -25,8 +24,7 @@ class BoardMaster extends React.Component {
     // (pion, parcours du pion en jeu, ou simple tuile)
     currentBoard = () => {
         const { board, playerTurn, currentPlayer, inactivePlayers } = this.props;
-        console.log(inactivePlayers)
-        console.log(inactivePlayers)
+        console.log(currentPlayer)
         
         let position = currentPlayer.playerPosition
         console.log(position)
@@ -49,43 +47,11 @@ class BoardMaster extends React.Component {
     }
 
 
-    // gère le lancé de dés et met à jour la position du joueur
-    handleDiceRolled = () => {
-        let Result = Math.ceil(Math.random() * 6);
-            this.setState({ diceRolled : true });
-            this.setState({ enigmaOn : true });
-            this.setState({ diceResult : Result});
-    }
-
-
-    // met à jour la position du joueur et repére s'il arrive sur la case de fin
-    updatePlayerPosition = () => {
-        const { diceRolled, diceResult, players } = this.state;
-        const { playerTurn, currentPlayer } = this.props;
-
-        let currentPath= currentPlayer.path
-        let position = currentPlayer.playerPosition
-        let tilesLeft = (currentPath.slice(position)).length
-
-        if (diceRolled) {
-            let move = position + diceResult
-            let newPosition = currentPath[move]
-
-            if( move > tilesLeft) {
-            this.setState({gameEnd: 1})
-                // ajouter le setState dans tableau players player === playerTurn
-            } else {
-                this.setState({playerPosition : newPosition})
-                this.setState({gameEnd: 0})
-            }
-        }
-    }
-
 
 
     render () {
-        const { playerTurn, currentPlayer } = this.props; 
-        const {diceRolled, diceResult , enigmaOn } = this.state;
+        const { playerTurn, currentPlayer, diceRolled, diceResult , enigmaOn, handleDiceRolled, updatePlayerPosition} = this.props;
+        const { rien } = this.state;
 
         return (
             <div className="AEffacer">
@@ -106,8 +72,8 @@ class BoardMaster extends React.Component {
                     </Grid>
                 </div>
             </div>
-            <button onClick = {this.handleDiceRolled} disabled = { diceRolled }> { diceRolled ? diceResult : "not rolled" }</button>
-            <button onClick={this.updatePlayerPosition}>Moove</button>
+            <button onClick = {handleDiceRolled} disabled = { diceRolled }> { diceRolled ? diceResult : "not rolled" }</button>
+            <button onClick={updatePlayerPosition}>Moove</button>
             </div>
 
 

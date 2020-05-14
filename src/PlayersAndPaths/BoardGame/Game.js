@@ -12,18 +12,15 @@ class Game extends React.Component {
     super(props);
     this.state = {
 
-      
+      diceRolled: false,
+      diceResult: null,
+      enigmaOn: false,
+      gameEnd: 0,
 
       board: [],
       playerTurn: 1,
 
-      currentPlayer:[{
-        player: 1,
-        idusers: 11,
-        name: "Alan",
-        playerPosition: 25,
-        path: [0,1,9,17,25,24,32,40,41,42,43,35],
-        pathEnd: 35}],
+      currentPlayer:[{}],
 
       inactivePlayers:[],
 
@@ -73,7 +70,6 @@ class Game extends React.Component {
     return this.setState({ board: board })
   }
 
-
   //Gestion du tour de jeu
   handlePlayerTurn = () => {
     const { playerTurn, players } = this.state
@@ -86,15 +82,15 @@ class Game extends React.Component {
       }
   }
 
-   //filtre le joueur dont c'est le tour de jeu pour remplir le state currentPlayer
-    currentPlayer = () => {
+  //filtre le joueur dont c'est le tour de jeu pour remplir le state currentPlayer
+  currentPlayer = () => {
     const { players, playerTurn } = this.state
     const extractedPlayer = players.filter(player => player.player === playerTurn)
     this.setState({ currentPlayer : extractedPlayer })
     }
 
-    //filtre les joueurs dont ce n'est pas le tour
-    inactivePlayers = () => {
+  //filtre les joueurs dont ce n'est pas le tour
+  inactivePlayers = () => {
     const {players, playerTurn} = this.state
     const extractedPlayers = players.filter(player => player.player !== playerTurn)
     this.setState({ inactivePlayers : extractedPlayers })
@@ -102,8 +98,42 @@ class Game extends React.Component {
 
 
 
+
+        // gère le lancé de dés et met à jour la position du joueur
+        handleDiceRolled = () => {
+          let Result = Math.ceil(Math.random() * 6);
+              this.setState({ diceRolled : true });
+              this.setState({ enigmaOn : true });
+              this.setState({ diceResult : Result});
+      }
+  
+  
+      // met à jour la position du joueur et repére s'il arrive sur la case de fin
+      updatePlayerPosition = () => {
+          const { playerTurn, currentPlayer, diceRolled, diceResult } = this.state;
+  
+          let currentPath= currentPlayer.path
+          let position = currentPlayer.playerPosition
+          let tilesLeft = (currentPath.slice(position)).length
+  
+          if (diceRolled) {
+              let move = position + diceResult
+              let newPosition = currentPath[move]
+  
+              if( move > tilesLeft) {
+              this.setState({gameEnd: 1})
+                  // ajouter le setState dans tableau players player === playerTurn
+              } else {
+                  this.setState({playerPosition : newPosition})
+                  this.setState({gameEnd: 0})
+              }
+          }
+      }
+
+
+
   render() {
-    const { board, playerTurn, currentPlayer, inactivePlayers } = this.state;
+    const { board, playerTurn, currentPlayer, inactivePlayers, diceRolled, diceResult, enigmaOn } = this.state;
 
     return (
       <div>
@@ -111,7 +141,19 @@ class Game extends React.Component {
         <button onClick={ this.handlePlayerTurn } >Player : {playerTurn}</button>
 
         <div className="BoardContainer">
-          <BoardMaster board={board} playerTurn={playerTurn} currentPlayer={currentPlayer[0]} inactivePlayers={inactivePlayers}></BoardMaster>
+          <BoardMaster
+            board={board}
+            playerTurn={playerTurn}
+            currentPlayer={currentPlayer[0]}
+            inactivePlayers={inactivePlayers}
+            diceRolled = {diceRolled}
+            diceResult = {diceResult}
+            handleDiceRolled = {this.handleDiceRolled}
+            updatePlayerPosition = {this.updatePlayerPosition}
+            enigmaOn = {enigmaOn}
+            >
+
+          </BoardMaster>
         </div>
       </div>
     );
