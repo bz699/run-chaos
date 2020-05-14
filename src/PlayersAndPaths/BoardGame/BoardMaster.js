@@ -24,10 +24,8 @@ class BoardMaster extends React.Component {
     // (pion, parcours du pion en jeu, ou simple tuile)
     currentBoard = () => {
         const { board, playerTurn, currentPlayer, inactivePlayers } = this.props;
-        console.log(currentPlayer)
         
         let position = currentPlayer.playerPosition
-        console.log(position)
         let currentPath = currentPlayer.path
         // création d'un tableau contenant les cases des autres pions
         let positions = (inactivePlayers.map(player => player.playerPosition))
@@ -59,7 +57,7 @@ class BoardMaster extends React.Component {
 
                 <CentralSphere
                     diceRolled = {diceRolled}
-                    handleDiceRolled = {this.handleDiceRolled}
+                    handleDiceRolled = {handleDiceRolled}
                     enigmaOn = {enigmaOn}
                     playerTurn={playerTurn}
                     currentPlayer={currentPlayer}/>
@@ -73,7 +71,7 @@ class BoardMaster extends React.Component {
                 </div>
             </div>
             <button onClick = {handleDiceRolled} disabled = { diceRolled }> { diceRolled ? diceResult : "not rolled" }</button>
-            <button onClick={updatePlayerPosition}>Moove</button>
+            <button onClick = {updatePlayerPosition}>Moove </button>
             </div>
 
 
