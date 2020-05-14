@@ -12,16 +12,21 @@ class Game extends React.Component {
     super(props);
     this.state = {
 
+      
+
       board: [],
       playerTurn: 1,
+
       currentPlayer:[{
         player: 1,
         idusers: 11,
         name: "Alan",
-        playerPosition: 0,
+        playerPosition: 25,
         path: [0,1,9,17,25,24,32,40,41,42,43,35],
         pathEnd: 35}],
-      
+
+      inactivePlayers:[],
+
       players: [
         {
           player: 1,
@@ -29,35 +34,37 @@ class Game extends React.Component {
           name: "Alan",
           playerPosition: 0,
           path: [0,1,9,17,25,24,32,40,41,42,43,35],
-          pathEnd: 35,
-        },
+          pathEnd: 35},
         {
           player: 2,
           idusers: 31, 
           name: "Judy",
           playerPosition: 7,
-          path: [7,15,14,13,12,4,3,11,10,18,26,27],
+          path: [7,15,14,13,12,4,3,2,10,18,26,27],
           pathEnd: 27,
-        },
-        { 
+          },
+          { 
           player: 3,
           idusers: 41,
           name: "Peter",
           playerPosition: 56,
           path: [56,48,49,50,51,59,60,61,53,45,49,37,36],
           pathEnd: 36,
-        }
-      ],
+          }
+      ]
+
     }
   }
 
   componentDidMount() {
     this.createBoard();
     this.currentPlayer();
+    this.inactivePlayers();
+
   }
 
 
-  //création du plateau de jeu : tableau de cells key=value
+  //création du plateau de jeu vierge : tableau de cells key=value
   createBoard = () => {
     const { board } = this.state;
     for (let tile = 0; tile <64; tile ++){
@@ -79,17 +86,24 @@ class Game extends React.Component {
       }
   }
 
-    //filtre le joueur dont c'est le tour de jeu pour remplir le state currentPlayer
+   //filtre le joueur dont c'est le tour de jeu pour remplir le state currentPlayer
     currentPlayer = () => {
-      const { players, playerTurn } = this.state
-      const extractedPlayer = players.filter(player => player.player === playerTurn)
-      this.setState({ currentPlayer : extractedPlayer })
+    const { players, playerTurn } = this.state
+    const extractedPlayer = players.filter(player => player.player === playerTurn)
+    this.setState({ currentPlayer : extractedPlayer })
+    }
+
+    //filtre les joueurs dont ce n'est pas le tour
+    inactivePlayers = () => {
+    const {players, playerTurn} = this.state
+    const extractedPlayers = players.filter(player => player.player !== playerTurn)
+    this.setState({ inactivePlayers : extractedPlayers })
     }
 
 
 
   render() {
-    const { board, currentPlayer, playerTurn } = this.state;
+    const { board, playerTurn, currentPlayer, inactivePlayers } = this.state;
 
     return (
       <div>
@@ -97,7 +111,7 @@ class Game extends React.Component {
         <button onClick={ this.handlePlayerTurn } >Player : {playerTurn}</button>
 
         <div className="BoardContainer">
-          <BoardMaster playerTurn={playerTurn} board={board} currentPlayer={currentPlayer[0]}></BoardMaster>
+          <BoardMaster board={board} playerTurn={playerTurn} currentPlayer={currentPlayer[0]} inactivePlayers={inactivePlayers}></BoardMaster>
         </div>
       </div>
     );
