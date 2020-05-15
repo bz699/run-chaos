@@ -18,6 +18,11 @@ class BoardMaster extends React.Component {
 
         }
     }
+
+    // update de currentBoard lorsque le pion a avancé (click moove)
+    componentDidUpdate = () => {
+
+    }
     
 
     // affiche les cases du plateau en faisant appel aux composants selon leur qualité
@@ -43,8 +48,6 @@ class BoardMaster extends React.Component {
             };
         });
     }
-
-
 
 
     render () {

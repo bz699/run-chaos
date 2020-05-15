@@ -61,6 +61,19 @@ class Game extends React.Component {
   }
 
 
+  // update de currentPlayer avec la nouvelle position = si diceRolled = true
+  // au changement de tour de jeu : update currentplayer / inactivesPlayers
+
+
+/*   componentDidUpdate(prevState) {
+    let Turn = this.state.playerTurn
+    let prevTurn = prevState.playerTurn
+    if (Turn !== prevTurn) {
+      this.createBoard(Turn);
+    }
+  }  */
+
+
   //création du plateau de jeu vierge : tableau de cells key=value
   createBoard = () => {
     const { board } = this.state;
@@ -109,13 +122,11 @@ class Game extends React.Component {
   
       // met à jour la position du joueur et repére s'il arrive sur la case de fin
       updatePlayerPosition = () => {
-        const { diceRolled, diceResult, playerTurn, currentPlayer } = this.state;
-        const playingPlayer = currentPlayer[0]
+        const { diceRolled, diceResult, playerTurn, currentPlayer, players } = this.state;
+        const playingPlayer = players[playerTurn -1]
+        console.log(playingPlayer)
         let currentPath= playingPlayer.path
         let position = playingPlayer.playerPosition
-
-        
-        console.log(playingPlayer)
 
         if (diceRolled) {
           let tilesLeft = (currentPath.slice(position)).length
@@ -127,8 +138,13 @@ class Game extends React.Component {
             console.log("c'est fini")
                  // ajouter le setState dans tableau players player === playerTurn
             } else {
-              //this.setState({playerPosition : newPosition})
-              this.setState({gameEnd: 2})
+              this.setState(state =>
+                { state.players[playerTurn-1].playerPosition = newPosition
+                return state})
+              
+              
+                console.log(players[playerTurn-1].playerPosition)
+              //this.setState({gameEnd: 2})
               console.log("on avance")
             }
         }
@@ -138,7 +154,6 @@ class Game extends React.Component {
 
   render() {
     const { board, playerTurn, currentPlayer, inactivePlayers, diceRolled, diceResult, enigmaOn } = this.state;
-    console.log(playerTurn)
 
     return (
       <div>
