@@ -27,4 +27,11 @@
     margin: auto;
   }
 
+.allButtons {
+  display: flex;
+  flex-direction: column;
+}
 
+.allButtons button {
+  width: 150px;
+}

@@ -20,9 +20,7 @@ class Game extends React.Component {
       board: [],
       playerTurn: 1,
 
-      currentPlayer:[{}],
 
-      inactivePlayers:[],
 
       players: [
         {
@@ -89,8 +87,10 @@ class Game extends React.Component {
 
       if (playerTurn < numbersOfPlayers) {
         this.setState({ playerTurn : playerTurn +1 })
+        this.setState({enigmaOn : false})
       } else {
         this.setState({ playerTurn : 1 })
+        this.setState({enigmaOn : false})
       }
   }
 
@@ -134,10 +134,12 @@ class Game extends React.Component {
             this.setState({gameEnd: 1});
                  // ajouter le setState dans tableau players player === playerTurn
             } else {
+              
               this.setState({ enigmaOn : true })
               this.setState(state =>
                 { state.players[playerTurn-1].playerPosition = newPosition
-                return state});
+                return state}
+              );
             }
         }
       }
@@ -145,13 +147,11 @@ class Game extends React.Component {
 
 
   render() {
-    const { board, playerTurn, players, inactivePlayers, diceRolled, diceResult, enigmaOn, changePlayerTurn } = this.state;
-    console.log(playerTurn)
+    const { board, playerTurn, players, inactivePlayers, diceRolled, diceResult, enigmaOn } = this.state;
+
 
     return (
       <div>
-        
-        <button onClick={ this.changePlayerTurn } >Player : {playerTurn}</button>
 
         <div className="BoardContainer">
           <BoardMaster
@@ -165,7 +165,7 @@ class Game extends React.Component {
             handleDiceRolled = {this.handleDiceRolled}
             updatePlayerPosition = {this.updatePlayerPosition}
             enigmaOn = {enigmaOn}
-            changePlayerTurn = {changePlayerTurn}
+            changePlayerTurn = {this.changePlayerTurn}
             >
           </BoardMaster>
         </div>
