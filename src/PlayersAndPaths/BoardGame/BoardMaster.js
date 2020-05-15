@@ -28,10 +28,11 @@ class BoardMaster extends React.Component {
     // affiche les cases du plateau en faisant appel aux composants selon leur qualité
     // (pion, parcours du pion en jeu, ou simple tuile)
     currentBoard = () => {
-        const { board, playerTurn, currentPlayer, inactivePlayers } = this.props;
+        const { board, playerTurn, inactivePlayers, players } = this.props;
         
-        let position = currentPlayer.playerPosition
-        let currentPath = currentPlayer.path
+        let playingPlayer = players[playerTurn -1]
+        let position = playingPlayer.playerPosition
+        let currentPath = playingPlayer.path
         // création d'un tableau contenant les cases des autres pions
         let positions = (inactivePlayers.map(player => player.playerPosition))
         
@@ -74,7 +75,7 @@ class BoardMaster extends React.Component {
                 </div>
             </div>
             <button onClick = {handleDiceRolled} disabled = { diceRolled }> { diceRolled ? diceResult : "not rolled" }</button>
-            <button onClick = {updatePlayerPosition}>Moove </button>
+            <button onClick = {updatePlayerPosition} disabled = { enigmaOn }>Moove </button>
             </div>
 
 

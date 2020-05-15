@@ -55,7 +55,7 @@ class Game extends React.Component {
 
   componentDidMount() {
     this.createBoard();
-    this.currentPlayer();
+//  this.currentPlayer();
     this.inactivePlayers();
     this.updatePlayerPosition();
   }
@@ -71,7 +71,7 @@ class Game extends React.Component {
     if (Turn !== prevTurn) {
       this.createBoard(Turn);
     }
-  }  */
+  } */
 
 
   //création du plateau de jeu vierge : tableau de cells key=value
@@ -96,12 +96,12 @@ class Game extends React.Component {
   }
 
 
-  //filtre le joueur dont c'est le tour de jeu pour remplir le state currentPlayer
+/*   //filtre le joueur dont c'est le tour de jeu pour remplir le state currentPlayer
   currentPlayer = () => {
     const { players, playerTurn } = this.state
     const extractedPlayer = players.filter(player => player.player === playerTurn)
     this.setState({ currentPlayer : extractedPlayer })
-    }
+    } */
 
   //filtre les joueurs dont ce n'est pas le tour pour remplir inactivePlayers
   inactivePlayers = () => {
@@ -122,8 +122,7 @@ class Game extends React.Component {
       // met à jour la position du joueur et repére s'il arrive sur la case de fin
       updatePlayerPosition = () => {
         const { diceRolled, diceResult, playerTurn, currentPlayer, players } = this.state;
-        const playingPlayer = players[playerTurn -1]
-        console.log(playingPlayer)
+        let playingPlayer = players[playerTurn -1]
         let currentPath= playingPlayer.path
         let position = playingPlayer.playerPosition
 
@@ -134,18 +133,12 @@ class Game extends React.Component {
               
             if( move > tilesLeft) {
             this.setState({gameEnd: 1});
-            console.log("c'est fini")
                  // ajouter le setState dans tableau players player === playerTurn
             } else {
               this.setState({ enigmaOn : true })
               this.setState(state =>
                 { state.players[playerTurn-1].playerPosition = newPosition
-                return state})
-              
-              
-                console.log(players[playerTurn-1].playerPosition)
-              //this.setState({gameEnd: 2})
-              console.log("on avance")
+                return state});
             }
         }
       }
@@ -153,7 +146,8 @@ class Game extends React.Component {
 
 
   render() {
-    const { board, playerTurn, currentPlayer, inactivePlayers, diceRolled, diceResult, enigmaOn } = this.state;
+    const { board, playerTurn, players, inactivePlayers, diceRolled, diceResult, enigmaOn } = this.state;
+    console.log(playerTurn)
 
     return (
       <div>
@@ -164,8 +158,9 @@ class Game extends React.Component {
           <BoardMaster
             board={board}
             playerTurn={playerTurn}
-            currentPlayer={currentPlayer[0]}
+            //currentPlayer={currentPlayer[0]}
             inactivePlayers={inactivePlayers}
+            players={players}
             diceRolled = {diceRolled}
             diceResult = {diceResult}
             handleDiceRolled = {this.handleDiceRolled}

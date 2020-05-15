@@ -15,7 +15,7 @@ const { diceRolled, enigmaOn, currentPlayer, handleDiceRolled } = props
                         : "button-off"}
                 onClick={handleDiceRolled}>
                     { diceRolled
-                    ? "Enigma" // link to enigma
+                    ? "" // link to enigma
                     : "Roll Dices" }
             </button>
 
