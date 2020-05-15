@@ -20,7 +20,7 @@ class BoardMaster extends React.Component {
     }
 
     // update de currentBoard lorsque le pion a avancé (click moove)
-    componentDidUpdate = () => {
+    componentDidUpdate = (prevState) => {
 
     }
     
@@ -52,7 +52,7 @@ class BoardMaster extends React.Component {
 
 
     render () {
-        const { playerTurn, currentPlayer, diceRolled, diceResult , enigmaOn, handleDiceRolled, updatePlayerPosition} = this.props;
+        const { playerTurn, currentPlayer, diceRolled, diceResult , enigmaOn, handleDiceRolled, updatePlayerPosition, changePlayerTurn} = this.props;
         const { rien } = this.state;
 
         return (
@@ -64,7 +64,9 @@ class BoardMaster extends React.Component {
                     handleDiceRolled = {handleDiceRolled}
                     enigmaOn = {enigmaOn}
                     playerTurn={playerTurn}
-                    currentPlayer={currentPlayer}/>
+                    currentPlayer={currentPlayer}
+                    changePlayerTurn={changePlayerTurn}/>
+                    {/* ajouter changeTurn */} 
 
                 <div className="TileBoard">
                     <Grid

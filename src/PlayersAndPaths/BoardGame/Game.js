@@ -64,14 +64,13 @@ class Game extends React.Component {
   // update de currentPlayer avec la nouvelle position = si diceRolled = true
   // au changement de tour de jeu : update currentplayer / inactivesPlayers
 
-
-/*   componentDidUpdate(prevState) {
-    let Turn = this.state.playerTurn
-    let prevTurn = prevState.playerTurn
-    if (Turn !== prevTurn) {
-      this.createBoard(Turn);
+    componentDidUpdate(prevState) {
+      let Turn = this.state.playerTurn
+      let prevTurn = prevState.playerTurn
+      if (Turn === prevTurn) {
+        this.inactivePlayers(Turn);
     }
-  } */
+  }
 
 
   //création du plateau de jeu vierge : tableau de cells key=value
@@ -84,7 +83,7 @@ class Game extends React.Component {
   }
 
   //Gestion du tour de jeu
-  handlePlayerTurn = () => {
+  changePlayerTurn = () => {
     const { playerTurn, players } = this.state
     const numbersOfPlayers = players.length
 
@@ -146,13 +145,13 @@ class Game extends React.Component {
 
 
   render() {
-    const { board, playerTurn, players, inactivePlayers, diceRolled, diceResult, enigmaOn } = this.state;
+    const { board, playerTurn, players, inactivePlayers, diceRolled, diceResult, enigmaOn, changePlayerTurn } = this.state;
     console.log(playerTurn)
 
     return (
       <div>
         
-        <button onClick={ this.handlePlayerTurn } >Player : {playerTurn}</button>
+        <button onClick={ this.changePlayerTurn } >Player : {playerTurn}</button>
 
         <div className="BoardContainer">
           <BoardMaster
@@ -166,6 +165,7 @@ class Game extends React.Component {
             handleDiceRolled = {this.handleDiceRolled}
             updatePlayerPosition = {this.updatePlayerPosition}
             enigmaOn = {enigmaOn}
+            changePlayerTurn = {changePlayerTurn}
             >
           </BoardMaster>
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import './Style/CentralSphere.css'
 
 function CentralSphere(props) {
-const { diceRolled, enigmaOn, currentPlayer, handleDiceRolled } = props
+const { diceRolled, enigmaOn, currentPlayer, handleDiceRolled, changePlayerTurn } = props
 
     return (
         
@@ -12,11 +12,14 @@ const { diceRolled, enigmaOn, currentPlayer, handleDiceRolled } = props
                 className=
                     { enigmaOn
                         ? "button-on"
-                        : "button-off"}
+                        : "button-off"
+                    }
                 onClick={handleDiceRolled}>
                     { diceRolled
-                    ? "" // link to enigma
-                    : "Roll Dices" }
+                    ? "Enigma"
+                    : "Roll Dices"
+                    }
+                
             </button>
 
 {/*             <button className=
