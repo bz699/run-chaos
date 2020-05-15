@@ -115,7 +115,6 @@ class Game extends React.Component {
   handleDiceRolled = () => {
       let Result = Math.ceil(Math.random() * 6);
       this.setState({ diceRolled : true });
-      this.setState({ enigmaOn : true });
       this.setState({ diceResult : Result});
       }
   
@@ -138,6 +137,7 @@ class Game extends React.Component {
             console.log("c'est fini")
                  // ajouter le setState dans tableau players player === playerTurn
             } else {
+              this.setState({ enigmaOn : true })
               this.setState(state =>
                 { state.players[playerTurn-1].playerPosition = newPosition
                 return state})
