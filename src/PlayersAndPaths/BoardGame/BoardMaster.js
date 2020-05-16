@@ -30,7 +30,7 @@ class BoardMaster extends React.Component {
         // création d'un tableau contenant les cases des autres pions
         let otherPlayers = players.map(player => player)
         let playingPlayer = otherPlayers.splice(playerTurn-1, 1)[0]
-        console.log(otherPlayers, players, playingPlayer)
+        console.log(playingPlayer)
         let position = playingPlayer.playerPosition
         let positions = (otherPlayers.map(player => player.playerPosition))
         let currentPath = playingPlayer.path
@@ -78,7 +78,7 @@ class BoardMaster extends React.Component {
                 </div>
                 <div className="allButtons">
                     <button onClick = {handleDiceRolled} disabled = { diceRolled }> { diceRolled ? diceResult : "roll dices" }</button>
-                    <button onClick = {updatePlayerPosition} disabled = { enigmaOn }>Moove </button>
+                    <button onClick = {updatePlayerPosition} disabled = { enigmaOn }>Move </button>
                     <button onClick={ changePlayerTurn } >Player : {playerTurn} <br/> Change Turn</button>
                 </div>
             </div>
