@@ -13,7 +13,7 @@ class BoardMaster extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+            didPlayerchange : false,
             //   enigmaOn: false,
             
         }
@@ -30,11 +30,9 @@ class BoardMaster extends React.Component {
         // création d'un tableau contenant les cases des autres pions
         let otherPlayers = players.map(player => player)
         let playingPlayer = otherPlayers.splice(playerTurn-1, 1)[0]
-        console.log(playingPlayer)
-        let position = playingPlayer.playerPosition
-        let positions = (otherPlayers.map(player => player.playerPosition))
+        let position = playingPlayer.path[playingPlayer.playerIndex]
+        let positions = (otherPlayers.map(player => player.path[player.playerIndex]))
         let currentPath = playingPlayer.path
-        
         
         return board.map(number => {
             if (position === number){
@@ -52,8 +50,9 @@ class BoardMaster extends React.Component {
 
 
     render () {
-        const { playerTurn, currentPlayer, diceRolled, diceResult , enigmaOn, handleDiceRolled, updatePlayerPosition, changePlayerTurn} = this.props;
+        const { playerTurn, diceRolled, diceResult, enigmaOn, handleDiceRolled, updatePlayerPosition, changePlayerTurn} = this.props;
         const { rien } = this.state;
+        
 
         return (
             <div className="AEffacer">
@@ -64,7 +63,6 @@ class BoardMaster extends React.Component {
                         handleDiceRolled = {handleDiceRolled}
                         enigmaOn = {enigmaOn}
                         playerTurn={playerTurn}
-                        currentPlayer={currentPlayer}
                         changePlayerTurn={changePlayerTurn}/>
                         {/* ajouter changeTurn */} 
 
